@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<h1>Hello world</h1>
+{% if user.is_authenticated %}
+<button class="button" action="{% url 'login:signout'}" onclick="">Sign out</button>
+{% else %}
+<ul>
+    <li><button class="button" action="{% url 'login:signup'}" onclick="">Sign up</button></li>
+    <br />
+    <li><button class="button" action="{% url 'login:signin'}" onclick="">Sign in</button></li>
+</ul>
+
+
+{% endif %}
+
+{% endblock %} 
