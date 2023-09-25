@@ -1,16 +1,27 @@
 {% load static %}
+{% load bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
 <!doctype html>
 <html>
 <head>
     <title>My health buddy</title>
     
-    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
 </head>
 <body>
 
-    {% block content %}
-    <h1>Hello World</h1>
-    {% endblock %}
+    <div class="container">
+        <ul class="nav bg-info">
+          <li class="nav-item">
+            <a class="nav-link link-light" href="/">Workout Tracker</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link link-dark" href="/members">Calorie Tracker</a>
+          </li>
+        </ul>
+        {% block content %}
+        {% endblock %}
+      </div>
 
 </body>
 </html>
