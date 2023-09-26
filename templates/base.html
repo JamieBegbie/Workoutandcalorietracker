@@ -2,26 +2,58 @@
 {% load bootstrap5 %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+
 <!doctype html>
 <html>
 <head>
-    <title>My health buddy</title>
-    
+    <title>Dynamis</title>   
 </head>
 <body>
-
-    <div class="container">
-        <ul class="nav bg-info">
-          <li class="nav-item">
-            <a class="nav-link link-light" href="/">Workout Tracker</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link link-dark" href="/members">Calorie Tracker</a>
-          </li>
-        </ul>
-        {% block content %}
-        {% endblock %}
-      </div>
-
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="d-flex flex-grow-1">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#myNavbar7">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            
+            <div class="dropdown">
+                <div class="container" onclick="myFunction(this)">
+                    <div class="bar1"></div>
+                    <div class="bar2"></div>
+                    <div class="bar3"></div>
+                </div>
+                <div id="myDropdown"class="dropdown-content">
+                    <a href="#">Workout Planner</a>
+                    <a href="#">Calorie Tracker</a>
+                </div>
+            </div>
+            <div class="center-div">
+                <a class="navbar-brand mx-auto" href="#">Dynamis</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".dual-collapse2">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Right</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script>
+        function myFunction(x) {
+          x.classList.toggle("change");
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
+    </script>
+    {% block content %}
+    {% endblock %}
 </body>
 </html>
