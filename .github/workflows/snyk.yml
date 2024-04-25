@@ -17,15 +17,12 @@ jobs:
         uses: actions/setup-python@v4  # Updated to v4 for the latest stable release
         with:
           python-version: '3.8'  # Correctly specifying Python version
-
-      - name: Install Snyk
-        run: npm install -g snyk  # Assuming Node.js is set up, if not, add a node setup step before this
-
+          
       - name: Snyk Auth
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Snyk test
-        run: snyk test --json > snyk_output.json
+        run: snyk code test --json > snyk_output.json
 
       - name: Upload Snyk Test Result as Artifact
         uses: actions/upload-artifact@v3
