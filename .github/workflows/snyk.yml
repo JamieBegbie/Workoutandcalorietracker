@@ -1,21 +1,35 @@
 name: Snyk example
+
 on:
   workflow_dispatch:
+
 jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3  # Updated to v3 for the latest stable release
+
       - uses: snyk/actions/setup@master
-      - uses: actions/setup-python3.8@master
         with:
-          go-version: '1.19'
+          snyk-version: 'latest'  # Ensure you specify which version of Snyk to use
+
+      - name: Set up Python
+        uses: actions/setup-python@v4  # Updated to v4 for the latest stable release
+        with:
+          python-version: '3.8'  # Correctly specifying Python version
+
+      - name: Install Snyk
+        run: npm install -g snyk  # Assuming Node.js is set up, if not, add a node setup step before this
+
+      - name: Snyk Auth
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
+
       - name: Snyk test
-        run: snyk code test --json > snyk_output.json
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk test --json > snyk_output.json
+
       - name: Upload Snyk Test Result as Artifact
         uses: actions/upload-artifact@v3
         with:
           name: snyk-results
-          path: snyk_output.jso
+          path: snyk_output.json
+
