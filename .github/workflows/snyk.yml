@@ -11,6 +11,9 @@ jobs:
 
       - name: Setup Snyk
         uses: snyk/actions/setup@master
+        
+      - name: Snyk Authentication
+        run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Run Snyk Code Test
         continue-on-error: true  # This step will not cause the workflow to fail
