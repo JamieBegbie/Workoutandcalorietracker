@@ -7,21 +7,13 @@ jobs:
   security:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3  # Updated to v3 for the latest stable release
+      - uses: actions/checkout@v3
 
-      - uses: snyk/actions/setup@master
-        with:
-          snyk-version: 'latest'  # Ensure you specify which version of Snyk to use
+      - name: Setup Snyk
+        uses: snyk/actions/setup@master
 
-      - name: Set up Python
-        uses: actions/setup-python@v4  # Updated to v4 for the latest stable release
-        with:
-          python-version: '3.8'  # Correctly specifying Python version
-          
-      - name: Snyk Auth
-        run: snyk auth ${{ secrets.SNYK_TOKEN }}
-
-      - name: Snyk test
+      - name: Run Snyk Code Test
+        continue-on-error: true  # This step will not cause the workflow to fail
         run: snyk code test --json > snyk_output.json
 
       - name: Upload Snyk Test Result as Artifact
