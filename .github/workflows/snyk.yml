@@ -22,7 +22,7 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Snyk test
-        run: snyk code test --json > snyk_output.json
+        run: snyk test --json > snyk_output.json
 
       - name: Upload Snyk Test Result as Artifact
         uses: actions/upload-artifact@v3
